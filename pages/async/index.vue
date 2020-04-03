@@ -14,7 +14,7 @@ export default {
       result: ''
     }
   },
-  async asyncData ({ params }) {
+  async asyncData () {
     const timeout = (ms) => new Promise(res => setTimeout(res, ms))
     console.log('Start Loading')
     await timeout(1000)

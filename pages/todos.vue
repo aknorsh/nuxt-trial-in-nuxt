@@ -4,12 +4,13 @@
       This TODO is based on vuex.
     </p>
     <ul>
-      <li v-for="todo in todos">
+      <li v-for="todo in todos" :key="todo.text">
         <input :checked="todo.done" @change="toggle(todo)" type="checkbox">
         <span :class="{ done: todo.done }">{{ todo.text }}</span>
       </li>
       <li><input @keyup.enter="addTodo" placeholder="What needs to be done?"></li>
     </ul>
+    <notifications group="dup-error" />
   </div>
 </template>
 
@@ -24,8 +25,18 @@ export default {
   },
   methods: {
     addTodo (e) {
-      this.$store.commit('todos/add', e.target.value)
-      e.target.value = ''
+      const val = e.target.value
+      if (this.todos.map(e => e.text).indexOf(val) > -1) {
+        this.$notify({
+          group: 'dup-error',
+          title: 'Watch Out!',
+          text: 'Todo is already in list!',
+          type: 'warn'
+        })
+      } else {
+        this.$store.commit('todos/add', val)
+        e.target.value = ''
+      }
     },
     ...mapMutations({
       toggle: 'todos/toggle'

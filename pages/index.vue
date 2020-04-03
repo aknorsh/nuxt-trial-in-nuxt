@@ -4,7 +4,7 @@
 
     <p>Now you are on /pages/index.vue</p>
 
-    <div v-for="el in links">
+    <div v-for="el in links" :key="el.path">
       <nuxt-link :to="el.path">
       Link to {{el.name}}.
       </nuxt-link>
