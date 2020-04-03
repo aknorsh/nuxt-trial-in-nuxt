@@ -1,0 +1,12 @@
+header, footer {
+  background-color: black;
+  color: white;
+}
+
+.test-enter-active, .test-leave-active {
+  transition: opacity .5s;
+}
+
+.test-enter, .test-leave-to {
+  opacity: 0;
+}
